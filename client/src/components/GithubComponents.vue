@@ -1,6 +1,22 @@
 <template>
   <div class="container">
-    <h3>Public Repositories</h3>
+    <h3 class="p-3 text-center">Vue.js - Display a list of items with v-for</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>URL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="repository in repositories" :key="repository._id">
+          <td>{{ repository._id }} </td>
+          <td>{{ repository.name }} </td>
+          <td> <a :href="repository.url" target="_blank"> {{ repository.url }}</a></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -8,38 +24,33 @@
 import GithubService from '../GithubService';
 
 export default {
-  name: 'GithubComponents',
   data() {
     return {
-      repositories: [],
-      error: '',
-      text: ''
-    }
+      repositories: []
+    };
   },
 
   async created() {
     try {
-      this.repositories = await GithubService.getPublicRepositories();
+      GithubService.getPublicRepositories().then(res => {
+          this.repositories = res.data;
+      })
     } catch (err) {
+      console.log(err)
       this.error = err
     }
   }
-}
+
+};
 </script>
 
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+#app {
+  display: flex;
+  flex-wrap: wrap;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+
+.entry {
+  flex: 1 0 25%;
 }
 </style>

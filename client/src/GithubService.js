@@ -8,4 +8,4 @@ class GithubService {
   }
 }
 
-export default GithubService;
+export default new GithubService;

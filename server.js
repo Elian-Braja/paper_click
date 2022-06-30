@@ -4,11 +4,15 @@ const MongoDb = require("./db/db_config")
 const axios = require('axios').default;
 const bodyParser = require('body-parser')
 const repoModel = require("./models/repo_model");
+const cors = require('cors');
 const app = express();
 
 app.use(Router);
 app.use(MongoDb);
 app.use(bodyParser.json());
+app.use(cors({
+  origin: '*'
+}));
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/views/login.html");
