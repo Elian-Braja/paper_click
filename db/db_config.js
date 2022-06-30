@@ -18,4 +18,4 @@ module.exports = app;
 
 // username: user
 // password: rUtZwavWfjBUywvp
-// db_name: my_databaseDB
+// db_name: github

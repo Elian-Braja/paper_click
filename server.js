@@ -3,16 +3,12 @@ const Router = require("./routes/routes")
 const MongoDb = require("./db/db_config")
 const axios = require('axios').default;
 const bodyParser = require('body-parser')
-const app = express();
 const repoModel = require("./models/repo_model");
-const userModel = require("./models/user_model");
-// const GithubApiCalls = require("./controllers/github_api")
+const app = express();
 
 app.use(Router);
 app.use(MongoDb);
 app.use(bodyParser.json());
-// app.use(express.json());
-// app.use(GithubApiCalls);
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/views/login.html");
@@ -62,6 +58,15 @@ app.get("/user_profile", (req, res) => {
   })
   res.sendFile(__dirname + "/views/user_profile.html");
 })
+
+app.get("/public_repositories", async (request, response) => {
+  const repositories = await repoModel.find();
+  try {
+    response.send(repositories);
+  } catch (error) {
+    response.send(error);
+  }
+});
 
 
 app.listen(8080, () => console.log('server is running on port 8080'));
