@@ -5,7 +5,7 @@ RUN cd client && npm install
 RUN cd ..
 RUN npm install
 RUN cd client
-CMD ["npm","run","serve"]
+CMD ["npm","run","dev"]
 
 # sudo docker build -t paper_click .
 # sudo docker run -it -p 8080:8080 paper_click

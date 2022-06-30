@@ -1,9 +1,10 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose")
+require("dotenv/config")
 
 mongoose.connect(
-  `mongodb+srv://user:rUtZwavWfjBUywvp@cluster0.dfyfxzw.mongodb.net/github?retryWrites=true&w=majority`,
+  process.env.DB_CONNECTION,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true

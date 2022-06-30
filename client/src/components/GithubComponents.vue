@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import GithubService from '../GithubService';
+import ApiService from '../services/api_service';
 
 export default {
   data() {
@@ -32,12 +32,11 @@ export default {
 
   async created() {
     try {
-      GithubService.getPublicRepositories().then(res => {
+      ApiService.getPublicRepositories().then(res => {
           this.repositories = res.data;
       })
     } catch (err) {
       console.log(err)
-      this.error = err
     }
   }
 
@@ -45,12 +44,4 @@ export default {
 </script>
 
 <style scoped>
-#app {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.entry {
-  flex: 1 0 25%;
-}
 </style>
