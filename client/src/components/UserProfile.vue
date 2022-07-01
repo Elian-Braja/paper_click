@@ -4,16 +4,16 @@
     <table class="table">
       <thead>
         <tr>
-          <th>ID</th>
           <th>Name</th>
           <th>URL</th>
+          <th>Description</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="repository in repositories" :key="repository._id">
-          <td>{{ repository._id }} </td>
           <td>{{ repository.name }} </td>
           <td> <a :href="repository.url" target="_blank"> {{ repository.url }}</a></td>
+          <td>{{ repository.description }} </td>
         </tr>
       </tbody>
     </table>

@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <GithubComponents />
+    <UserProfile />
   </div>
 </template>
 
 <script>
-import GithubComponents from './components/GithubComponents.vue'
+import UserProfile from './components/UserProfile.vue'
 
 export default {
   name: 'App',
   components: {
-    GithubComponents
+    UserProfile
 }
 }
 </script>
