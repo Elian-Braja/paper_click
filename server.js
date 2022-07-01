@@ -13,41 +13,43 @@ app.use(cors({ origin: "*" }));
 // app.use("/public_repositories", Router)
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/views/login.html");
-  app.get("/user/signin/callback", (req, res) => {
-    const { query } = req;
-    const { code } = query;
+  res.send("Server is running...");
+});
 
-    if (!code) {
-      return res.send({
-        success: false,
-        message: "no code",
-      });
-    }
+app.get("/user/signin/callback", (req, res) => {
+  const { query } = req;
+  const { code } = query;
 
-    axios({
-      method: "post",
-      url: "https://github.com/login/oauth/access_token",
-      data: {
-        client_id: process.env.CLIENT_ID,
-        client_secret: process.env.CLIENT_SECRET,
-        code: code,
-      },
-      headers: { "Content-Type": "application/json" },
-    }).then(function (result) {
-      result.data
-        ? res.redirect("http://localhost:8080/user_profile")
-        : res.redirect("/");
+  if (!code) {
+    return res.send({
+      success: false,
+      message: "no code",
     });
+  }
+
+  axios({
+    method: "post",
+    url: "https://github.com/login/oauth/access_token",
+    data: {
+      client_id: process.env.CLIENT_ID,
+      client_secret: process.env.CLIENT_SECRET,
+      code: code,
+    },
+    headers: { "Content-Type": "application/json" },
+  }).then(function (result) {
+    result.data
+      ? res.redirect("http://localhost:8081/user_profile")
+      : res.redirect("/");
   });
 });
 
 app.get("/user_profile", (req, res) => {
   axios({
     method: "get",
-    url: process.env.account_url,
+    url: "https://api.github.com/users/Hatemii/repos",
     headers: { "Content-Type": "application/json" },
   }).then(function (result) {
+    res.send(result.data)
     const myObj = result.data.map((record) => {
       return {
         name: record.name,
@@ -58,7 +60,6 @@ app.get("/user_profile", (req, res) => {
     });
     repoModel.insertMany(myObj);
   });
-  res.sendFile(__dirname + "/views/user_profile.html");
 });
 
 app.get("/public_repositories", async (request, response) => {

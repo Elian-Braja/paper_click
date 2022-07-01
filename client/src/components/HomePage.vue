@@ -1,19 +1,19 @@
 <template>
   <div class="container">
-    <h3 class="p-3 text-center">User Profile</h3>
+    <h3 class="p-3 text-center">Welcome</h3>
+    <br />
+    <h1>Login with Github</h1>
+    <br />
+    <a href="https://github.com/login/oauth/authorize?client_id=aa00582765f9040754a5">login with github</a>
   </div>
 </template>
 
 <script>
-import ApiService from '../services/api_service';
-
 export default {
   data() {
-    return {
-    };
+    return {};
   },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

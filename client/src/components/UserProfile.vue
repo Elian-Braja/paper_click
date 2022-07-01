@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <h3 class="p-3 text-center">Vue.js - Display a list of items with v-for</h3>
-    <table class="table">
+    <button @click="getRepos">Fetch Repos</button>
+    <table v-if="repositories.length && !loading" class="table">
       <thead>
         <tr>
           <th>Name</th>
@@ -11,9 +12,11 @@
       </thead>
       <tbody>
         <tr v-for="repository in repositories" :key="repository._id">
-          <td>{{ repository.name }} </td>
-          <td> <a :href="repository.url" target="_blank"> {{ repository.url }}</a></td>
-          <td>{{ repository.description }} </td>
+          <td>{{ repository.name }}</td>
+          <td>
+            <a :href="repository.url" target="_blank"> {{ repository.url }}</a>
+          </td>
+          <td>{{ repository.description }}</td>
         </tr>
       </tbody>
     </table>
@@ -21,27 +24,29 @@
 </template>
 
 <script>
-import ApiService from '../services/api_service';
+import ApiService from "../services/api_service";
 
 export default {
   data() {
     return {
-      repositories: []
+      loading: false,
+      repositories: [],
     };
   },
 
-  async created() {
-    try {
-      ApiService.getPublicRepositories().then(res => {
-          this.repositories = res.data;
-      })
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
+  methods: {
+    async getRepos() {
+      this.loading = true;
+      try {
+        const res = await ApiService.getPublicRepositories();
+        this.repositories = res.data;
+      } catch (e) {
+        console.log(e);
+      }
+      this.loading = false;
+    },
+  },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
