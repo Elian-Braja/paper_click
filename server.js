@@ -31,8 +31,8 @@ app.get("/", (req, res) => {
       method: 'post',
       url: 'https://github.com/login/oauth/access_token',
       data: {
-        client_id: "aa00582765f9040754a5",
-        client_secret: "d3993753b6011a136b1eea9b8c12a5b11e3ccda9",
+        client_id:  process.env.CLIENT_ID,
+        client_secret:  process.env.CLIENT_SECRET,
         code: code
       },
       headers: { 'Content-Type': 'application/json' }
@@ -45,7 +45,7 @@ app.get("/", (req, res) => {
 app.get("/user_profile", (req, res) => {
   axios({
       method: 'get',
-      url: 'https://api.github.com/users/Hatemii/repos',
+      url: process.env.account_url,
       headers: { 'Content-Type': 'application/json' }
   }).then(function (result) {
     const myObj = result.data.map((record) => {
