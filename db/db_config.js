@@ -1,22 +1,18 @@
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose")
-require("dotenv/config")
+const mongoose = require("mongoose");
+require("dotenv/config");
 
-mongoose.connect(
-  process.env.DB_CONNECTION,
-  {
+mongoose
+  .connect(process.env.DB_CONNECTION, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
-  }
-).then(() => {
+    useUnifiedTopology: true,
+  })
+  .then(() => {
     console.log("Connected to Database");
-}).catch((err) => {
+  })
+  .catch((err) => {
     console.log("Not Connected to Database ERROR! ", err);
-});
+  });
 
 module.exports = app;
-
-// username: user
-// password: rUtZwavWfjBUywvp
-// db_name: github
