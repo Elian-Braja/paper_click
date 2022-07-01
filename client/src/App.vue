@@ -1,19 +1,14 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <UserProfile />
+    <img alt="Vue logo" src="./assets/logo.png" />
+    <router-view />
   </div>
 </template>
 
 <script>
-import UserProfile from './components/UserProfile.vue'
-
 export default {
-  name: 'App',
-  components: {
-    UserProfile
-}
-}
+  name: "App",
+};
 </script>
 
 <style>
