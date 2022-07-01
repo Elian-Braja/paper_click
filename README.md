@@ -1,11 +1,11 @@
 # paper_click
 
-clone repo
+clone project
 
 cd paper_click
-  docker build -t paper_click .
-  docker run -it -p 8080:8080 paper_click
+  sudo docker build -t paper_click .
+  sudo docker run -it -p 8080:8080 paper_click
 
 cd client
-  npm install
-  npm run serve
+  sudo docker build -t paper_click/client .
+  sudo docker run -it -p 8081:8081 paper_click/client
