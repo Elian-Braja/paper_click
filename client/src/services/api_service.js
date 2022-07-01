@@ -1,10 +1,14 @@
-import axios from 'axios';
+import axios from "axios";
 
-const url = "http://localhost:8080"
+const url = "http://localhost:8080";
 
 class ApiService {
-  homePage() {
+  getRoot() {
     return axios.get(url);
+  }
+
+  sendAuthorizationRequest() {
+    return axios.get(url + "/user/signin/callback");
   }
 
   getUserProfile() {
@@ -16,4 +20,4 @@ class ApiService {
   }
 }
 
-export default new ApiService;
+export default new ApiService();
